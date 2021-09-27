@@ -1,0 +1,43 @@
+package view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+
+public class Sobre extends JDialog {
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Sobre dialog = new Sobre();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Sobre() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/img/carro1.png")));
+		setTitle("MW.Mec\u00E2nica - Sobre");
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("MW.Mec\u00E2nica - Sistema de Gest\u00E3o de Servi\u00E7os da Oficina Mec\u00E2nica ");
+		lblNewLabel.setBounds(10, 23, 395, 14);
+		getContentPane().add(lblNewLabel);
+
+	}
+
+}

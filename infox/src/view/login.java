@@ -110,6 +110,8 @@ public class login extends JFrame {
 	// exibir o icone
 	lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ok.png")));
 	}
+	//encerrar a conexao
+	con.close();
 	} catch (Exception e) {
 	System.out.println(e);
 	}
