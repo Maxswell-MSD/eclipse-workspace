@@ -50,23 +50,19 @@ public class Inicial extends JFrame {
 		JButton btnUsuarios = new JButton("");
 		btnUsuarios.setToolTipText("Usu\u00E1rios");
 		btnUsuarios.setIcon(new ImageIcon(Inicial.class.getResource("/img/users.png")));
-		btnUsuarios.setBounds(0, 0, 128, 128);
+		btnUsuarios.setBounds(26, 11, 128, 128);
 		contentPane.add(btnUsuarios);
 		
 		JButton btnClientes = new JButton("");
 		btnClientes.setIcon(new ImageIcon(Inicial.class.getResource("/img/clientes.png")));
 		btnClientes.setToolTipText("Clientes");
-		btnClientes.setBounds(139, 0, 128, 128);
+		btnClientes.setBounds(181, 11, 128, 128);
 		contentPane.add(btnClientes);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Inicial.class.getResource("/img/Logo.png")));
-		lblNewLabel.setBounds(287, 11, 235, 235);
+		lblNewLabel.setIcon(new ImageIcon(Inicial.class.getResource("/img/llmw.png")));
+		lblNewLabel.setBounds(277, 0, 255, 212);
 		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(325, 61, 235, 235);
-		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(302, 29, 153, 157);
@@ -82,13 +78,17 @@ public class Inicial extends JFrame {
 		});
 		btnSobre.setToolTipText("Sobre");
 		btnSobre.setIcon(new ImageIcon(Inicial.class.getResource("/img/interrogation.png")));
-		btnSobre.setBounds(185, 211, 64, 64);
+		btnSobre.setBounds(216, 203, 64, 64);
 		contentPane.add(btnSobre);
 		
 		JButton btnUsuarios_1 = new JButton("");
-		btnUsuarios_1.setIcon(new ImageIcon(Inicial.class.getResource("/img/Oss.png")));
+		btnUsuarios_1.setIcon(new ImageIcon(Inicial.class.getResource("/img/oss.png")));
 		btnUsuarios_1.setToolTipText("Os");
-		btnUsuarios_1.setBounds(0, 157, 128, 128);
+		btnUsuarios_1.setBounds(24, 168, 128, 128);
 		contentPane.add(btnUsuarios_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("Oficina Mec\u00E2nica");
+		lblNewLabel_3.setBounds(359, 185, 153, 14);
+		contentPane.add(lblNewLabel_3);
 	}
 }
