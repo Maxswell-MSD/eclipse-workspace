@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.Cursor;
 
 public class Principal extends JFrame {
 
@@ -43,6 +46,7 @@ public class Principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 538, 346);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.control);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -50,19 +54,19 @@ public class Principal extends JFrame {
 		JButton btnUsuarios = new JButton("");
 		btnUsuarios.setToolTipText("Usu\u00E1rios");
 		btnUsuarios.setIcon(new ImageIcon(Principal.class.getResource("/img/users.png")));
-		btnUsuarios.setBounds(0, 0, 128, 128);
+		btnUsuarios.setBounds(26, 0, 128, 128);
 		contentPane.add(btnUsuarios);
 		
 		JButton btnClientes = new JButton("");
 		btnClientes.setIcon(new ImageIcon(Principal.class.getResource("/img/clientes.png")));
 		btnClientes.setToolTipText("Clientes");
-		btnClientes.setBounds(139, 0, 128, 128);
+		btnClientes.setBounds(164, 0, 128, 128);
 		contentPane.add(btnClientes);
 		
 		JButton btnClientes_1 = new JButton("");
 		btnClientes_1.setIcon(new ImageIcon(Principal.class.getResource("/img/os.png")));
 		btnClientes_1.setToolTipText("OS");
-		btnClientes_1.setBounds(0, 168, 128, 128);
+		btnClientes_1.setBounds(26, 168, 128, 128);
 		contentPane.add(btnClientes_1);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -79,6 +83,9 @@ public class Principal extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnSobre = new JButton("");
+		btnSobre.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnSobre.setBorder(null);
+		btnSobre.setBackground(SystemColor.control);
 		btnSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Ativar a janela Sobre
@@ -88,7 +95,7 @@ public class Principal extends JFrame {
 		});
 		btnSobre.setToolTipText("Sobre");
 		btnSobre.setIcon(new ImageIcon(Principal.class.getResource("/img/about.png")));
-		btnSobre.setBounds(176, 200, 64, 64);
+		btnSobre.setBounds(188, 197, 64, 64);
 		contentPane.add(btnSobre);
 	}
 }

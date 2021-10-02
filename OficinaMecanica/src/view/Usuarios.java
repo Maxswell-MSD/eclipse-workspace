@@ -14,11 +14,14 @@ import java.sql.Connection;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Usuarios extends JFrame {
 
@@ -81,6 +84,11 @@ public class Usuarios extends JFrame {
 		contentPane.add(txtSenha);
 
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logar();
+			}
+		});
 		btnEntrar.setBounds(43, 154, 76, 23);
 		contentPane.add(btnEntrar);
 
@@ -116,4 +124,19 @@ public class Usuarios extends JFrame {
 	System.out.println(e);
 	}
 	}
-}
+	// login no sistema
+		private void logar() {
+			// validacao de campos obrigatorios
+
+			if (textLogin.getText().isEmpty()) {
+				// caixa de mensagem
+
+				JOptionPane.showMessageDialog(null, "Preencha o nome do usuário");
+				// posicionar o cursor na caixa de texto do usuario
+				textLogin.requestFocus();
+			} else {
+				// logica principal do login
+			}
+		}
+
+	}

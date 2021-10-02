@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
 
 public class Inicial extends JFrame {
 
@@ -43,6 +44,7 @@ public class Inicial extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 538, 346);
 		contentPane = new JPanel();
+		contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -69,6 +71,7 @@ public class Inicial extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnSobre = new JButton("");
+		btnSobre.setBorder(null);
 		btnSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Ativar a janela Sobre

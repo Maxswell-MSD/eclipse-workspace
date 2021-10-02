@@ -14,11 +14,14 @@ import java.sql.Connection;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class login extends JFrame {
 
@@ -81,6 +84,11 @@ public class login extends JFrame {
 		contentPane.add(txtSenha);
 
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logar();
+			}
+		});
 		btnEntrar.setBounds(43, 154, 76, 23);
 		contentPane.add(btnEntrar);
 
@@ -93,27 +101,45 @@ public class login extends JFrame {
 
 	DAO dao = new DAO();
 	private JLabel lblStatus;
+
 	// Status da conexao
 	private void status() {
-	try {
-	// estabelecer a conexao com o banco
-	Connection con = dao.conectar();
-	// status da conexao
-	if (con == null) {
-	// imprimir a mensagem no console
-	System.out.println("Erro de conexão");
-	// trocar o icone
-	lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/error.png")));
-	} else {
-	// imprimir a mensagem no console
-	System.out.println("Conexão estabelecida com sucesso");
-	// exibir o icone
-	lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ok.png")));
+		try {
+			// estabelecer a conexao com o banco
+			Connection con = dao.conectar();
+			// status da conexao
+			if (con == null) {
+				// imprimir a mensagem no console
+				System.out.println("Erro de conexão");
+				// trocar o icone
+				lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/error.png")));
+			} else {
+				// imprimir a mensagem no console
+				System.out.println("Conexão estabelecida com sucesso");
+				// exibir o icone
+				lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ok.png")));
+			}
+			// encerrar a conexao
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 	}
-	//encerrar a conexao
-	con.close();
-	} catch (Exception e) {
-	System.out.println(e);
+
+	// login no sistema
+	private void logar() {
+		// validacao de campos obrigatorios
+
+		if (textLogin.getText().isEmpty()) {
+			// caixa de mensagem
+
+			JOptionPane.showMessageDialog(null, "Preencha o nome do usuário");
+			// posicionar o cursor na caixa de texto do usuario
+			textLogin.requestFocus();
+		} else {
+			// logica principal do login
+		}
 	}
-	}
+
 }
