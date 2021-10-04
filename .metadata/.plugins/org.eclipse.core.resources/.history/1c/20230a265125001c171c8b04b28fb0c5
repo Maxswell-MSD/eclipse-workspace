@@ -1,0 +1,101 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Usuario extends JDialog {
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Usuario dialog = new Usuario();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Usuario() {
+		setResizable(false);
+		setTitle("InfoX-Usu\u00E1rios");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Usuario.class.getResource("/img/pc2.png")));
+		setModal(true);
+		setBounds(100, 100, 626, 410);
+		getContentPane().setLayout(null);
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setBounds(0, 338, 610, 33);
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane);
+			{
+				JButton okButton = new JButton("OK");
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+		}
+		
+		JLabel lblNewLabel = new JLabel("ID");
+		lblNewLabel.setBounds(40, 19, 31, 14);
+		getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(98, 16, 61, 20);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNome = new JLabel("Usu\u00E1rio");
+		lblNome.setBounds(40, 50, 46, 14);
+		getContentPane().add(lblNome);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(96, 47, 226, 20);
+		getContentPane().add(textField_1);
+		
+		JLabel lblUsurio = new JLabel("Login");
+		lblUsurio.setBounds(40, 81, 46, 14);
+		getContentPane().add(lblUsurio);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(96, 78, 226, 20);
+		getContentPane().add(textField_2);
+		
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(40, 112, 46, 14);
+		getContentPane().add(lblSenha);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(96, 109, 226, 20);
+		getContentPane().add(textField_3);
+		
+		JButton btnNewButton = new JButton("Iniciar");
+		btnNewButton.setBounds(153, 156, 89, 23);
+		getContentPane().add(btnNewButton);
+	}
+}

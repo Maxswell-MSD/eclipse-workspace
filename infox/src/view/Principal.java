@@ -52,6 +52,14 @@ public class Principal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnUsuarios = new JButton("");
+		btnUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//evento actionPerformed (pressionar o botao)
+				//exibir a tela de Usuarios
+				Usuario usuario = new Usuario();
+				usuario.setVisible(true);
+			}
+		});
 		btnUsuarios.setToolTipText("Usu\u00E1rios");
 		btnUsuarios.setIcon(new ImageIcon(Principal.class.getResource("/img/users.png")));
 		btnUsuarios.setBounds(26, 0, 128, 128);
