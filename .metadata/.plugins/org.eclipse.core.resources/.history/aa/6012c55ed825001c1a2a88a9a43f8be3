@@ -1,0 +1,134 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+
+public class Usuario extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JPasswordField txtSenha;
+	private JTextField txtUsuario;
+	private JTextField txtId;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Usuario dialog = new Usuario();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Usuario() {
+		setTitle("MW.Mec\u00E2nica - Usu\u00E1rios");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Usuario.class.getResource("/img/carro1.png")));
+		setModal(true);
+		setBounds(100, 100, 622, 442);
+		getContentPane().setLayout(null);
+		contentPanel.setBounds(0, 0, 606, 370);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel);
+		contentPanel.setLayout(null);
+		{
+			JLabel lblId = new JLabel("ID");
+			lblId.setHorizontalAlignment(SwingConstants.CENTER);
+			lblId.setBounds(161, 97, 46, 14);
+			contentPanel.add(lblId);
+		}
+		{
+			JLabel lblUsuario = new JLabel("* Usu\u00E1rio");
+			lblUsuario.setHorizontalAlignment(SwingConstants.LEFT);
+			lblUsuario.setBounds(161, 127, 69, 14);
+			contentPanel.add(lblUsuario);
+		}
+		{
+			JLabel lblSenha = new JLabel("* Senha");
+			lblSenha.setHorizontalAlignment(SwingConstants.LEFT);
+			lblSenha.setBounds(161, 155, 46, 14);
+			contentPanel.add(lblSenha);
+		}
+		
+		txtSenha = new JPasswordField();
+		txtSenha.setBounds(240, 149, 192, 20);
+		contentPanel.add(txtSenha);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(240, 121, 192, 20);
+		contentPanel.add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		txtId = new JTextField();
+		txtId.setBounds(239, 91, 67, 20);
+		contentPanel.add(txtId);
+		txtId.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("* Campos Obrigat\u00F3rio");
+		lblNewLabel.setBounds(220, 42, 155, 14);
+		contentPanel.add(lblNewLabel);
+		
+		JButton btnAdicionar = new JButton("");
+		btnAdicionar.setEnabled(false);
+		btnAdicionar.setToolTipText("Adicionar usu\u00E1rio");
+		btnAdicionar.setIcon(new ImageIcon(Usuario.class.getResource("/img/create.png")));
+		btnAdicionar.setBounds(107, 233, 80, 80);
+		contentPanel.add(btnAdicionar);
+		{
+			JButton btnPesquisar = new JButton("");
+			btnPesquisar.setToolTipText("Pesquisar usu\u00E1rio");
+			btnPesquisar.setIcon(new ImageIcon(Usuario.class.getResource("/img/read.png")));
+			btnPesquisar.setBounds(199, 233, 80, 80);
+			contentPanel.add(btnPesquisar);
+		}
+		{
+			JButton btnEditar = new JButton("");
+			btnEditar.setEnabled(false);
+			btnEditar.setToolTipText("Editar usu\u00E1rio");
+			btnEditar.setIcon(new ImageIcon(Usuario.class.getResource("/img/update.png")));
+			btnEditar.setBounds(295, 233, 80, 80);
+			contentPanel.add(btnEditar);
+		}
+		{
+			JButton btnExcluir = new JButton("");
+			btnExcluir.setEnabled(false);
+			btnExcluir.setToolTipText("Excluir usu\u00E1rio");
+			btnExcluir.setIcon(new ImageIcon(Usuario.class.getResource("/img/delete.png")));
+			btnExcluir.setBounds(390, 233, 80, 80);
+			contentPanel.add(btnExcluir);
+		}
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setBounds(0, 370, 606, 33);
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane);
+			{
+				JButton okButton = new JButton("OK");
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+		}
+	}
+}

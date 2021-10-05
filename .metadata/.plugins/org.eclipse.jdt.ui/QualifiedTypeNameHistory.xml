@@ -5,6 +5,6 @@
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-    <fullyQualifiedTypeName name="model.DAO"/>
     <fullyQualifiedTypeName name="java.security.Principal"/>
+    <fullyQualifiedTypeName name="model.DAO"/>
 </qualifiedTypeNameHistroy>
