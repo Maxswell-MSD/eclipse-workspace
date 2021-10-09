@@ -17,6 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
 public class Usuario extends JDialog {
@@ -97,67 +100,161 @@ public class Usuario extends JDialog {
 		lblSenha.setBounds(130, 176, 46, 14);
 		getContentPane().add(lblSenha);
 		
-		JButton btnPesquisar = new JButton("");
-		btnPesquisar.addActionListener(new ActionListener() {
+		btnPesquisar_1 = new JButton("");
+		btnPesquisar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Criando ação de pesquisar usuário
 				pesquisarUsuario();
 			}
 		});
-		btnPesquisar.setToolTipText("Pesquisar usu\u00E1rio");
-		btnPesquisar.setIcon(new ImageIcon(Usuario.class.getResource("/img/read.png")));
-		btnPesquisar.setBounds(201, 212, 80, 80);
-		getContentPane().add(btnPesquisar);
+		btnPesquisar_1.setToolTipText("Pesquisar usu\u00E1rio");
+		btnPesquisar_1.setIcon(new ImageIcon(Usuario.class.getResource("/img/read.png")));
+		btnPesquisar_1.setBounds(201, 212, 80, 80);
+		getContentPane().add(btnPesquisar_1);
 		
 		txtSenha = new JPasswordField();
 		txtSenha.setBounds(206, 173, 224, 20);
 		getContentPane().add(txtSenha);
 		
-		JButton btnAdicionar = new JButton("");
-		btnAdicionar.setEnabled(false);
-		btnAdicionar.setToolTipText("Adicionar usu\u00E1rio");
-		btnAdicionar.setIcon(new ImageIcon(Usuario.class.getResource("/img/create.png")));
-		btnAdicionar.setBounds(98, 212, 94, 80);
-		getContentPane().add(btnAdicionar);
+		btnAdicionar_1 = new JButton("");
+		btnAdicionar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adicionarUsuario();
+			}
+		});
+		btnAdicionar_1.setEnabled(false);
+		btnAdicionar_1.setToolTipText("Adicionar usu\u00E1rio");
+		btnAdicionar_1.setIcon(new ImageIcon(Usuario.class.getResource("/img/create.png")));
+		btnAdicionar_1.setBounds(98, 212, 94, 80);
+		getContentPane().add(btnAdicionar_1);
 		
-		JButton btnEditar = new JButton("");
-		btnEditar.setEnabled(false);
-		btnEditar.setToolTipText("Editar usu\u00E1rio");
-		btnEditar.setIcon(new ImageIcon(Usuario.class.getResource("/img/update.png")));
-		btnEditar.setBounds(290, 212, 80, 80);
-		getContentPane().add(btnEditar);
+		btnEditar_1 = new JButton("");
+		btnEditar_1.setEnabled(false);
+		btnEditar_1.setToolTipText("Editar usu\u00E1rio");
+		btnEditar_1.setIcon(new ImageIcon(Usuario.class.getResource("/img/update.png")));
+		btnEditar_1.setBounds(290, 212, 80, 80);
+		getContentPane().add(btnEditar_1);
 		
-		JButton btnExcluir = new JButton("");
-		btnExcluir.setEnabled(false);
-		btnExcluir.setToolTipText("Excluir usu\u00E1rio");
-		btnExcluir.setIcon(new ImageIcon(Usuario.class.getResource("/img/delete.png")));
-		btnExcluir.setBounds(385, 212, 80, 80);
-		getContentPane().add(btnExcluir);
+		btnExcluir_1 = new JButton("");
+		btnExcluir_1.setEnabled(false);
+		btnExcluir_1.setToolTipText("Excluir usu\u00E1rio");
+		btnExcluir_1.setIcon(new ImageIcon(Usuario.class.getResource("/img/delete.png")));
+		btnExcluir_1.setBounds(385, 212, 80, 80);
+		getContentPane().add(btnExcluir_1);
 		
 		JLabel lblCamposObrigatrios = new JLabel("* Campos Obrigat\u00F3rios");
 		lblCamposObrigatrios.setBounds(206, 11, 164, 14);
 		getContentPane().add(lblCamposObrigatrios);
 	}
 	// fim do construtor  importe a classe DAO crtl + shift + o
-	 DAO dao = new DAO();
-	    // Pesquisar usuario
-	private void pesquisarUsuario(){
+	DAO dao = new DAO();
+	private JButton btnAdicionar;
+	private JButton btnPesquisar;
+	private JButton btnEditar;
+	private JButton btnExcluir;
+	private JButton btnAdicionar_1;
+	private JButton btnExcluir_1;
+	private JButton btnPesquisar_1;
+	private JButton btnEditar_1;
 
-	// validação da pesquisa
-	// dentro do if é o nome do botao do id de pesquisa txtid
-	// depois de fazer o preenchimento if vai no designer e crie uma ação para esse botão.
-	if (txtId.getText().isEmpty()){
-	JOptionPane.showMessageDialog(null, "Preencha o ID");
-	// adicionando uma ação em quando clicar em ok voltar a tela de usuário
-	txtId.requestFocus();
-	}else {
-	    // logica principal
-
-
+	// pesquisar usuario (CRUD READ) Esse metodo sempre começa com a validaçao dos campos e ele entra na logica principal
+	private void pesquisarUsuario() {
+		// validacao
+		// se o campo txtId estiver vazio
+		if (txtId.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o ID");
+			txtId.requestFocus();
+		} else {
+			// logica principal Instrução sql para pesquisar um usuário. esse comando é dado no Mysql para essa integração de verificar
+			// pelo id se existe um usuário cadastrado com esse Id
+			String read = "select * from usuarios where id=?";
+			// tratamento de excecoes(ex: servidor indisponivel o try catch ele avisa e mostra onde está dando erro )
+			try {
+				// estabelecer uma conexao atraves da classe DAO que é responsável pela ligação do sql abrindo a conexão
+				Connection con = dao.conectar();
+				// preparar a instrução sql PreparedStatement vai substituir  (?) pelo conteúdo cadastrado no sql
+				PreparedStatement pst = con.prepareStatement(read);
+				// substituir parametros (?)
+				pst.setString(1, txtId.getText());
+				// resultado (executar a query que é a instrução do banco de dados mysql para obter os dados)
+				ResultSet rs = pst.executeQuery();
+				// Criando condições se existir este usuario no banco execute
+				if (rs.next()) {
+					// setar campos do usuário se existir usuário cadastrado observe no sql os nomes das colunas
+					// essas numerações equivale ao sql a ordem da coluna já que o id é da pesquisa ele não se aplica aqui por ser 1
+					txtUsuario.setText(rs.getString(2));
+					txtLogin.setText(rs.getString(3));
+					txtSenha.setText(rs.getString(4));
+					// gerenciar botoes para acesso as determinadas modificações(UX)
+					btnPesquisar_1.setEnabled(false);
+					btnEditar_1.setEnabled(true);
+					btnExcluir_1.setEnabled(true);
+					// senão existir usuário cadastrado mostre a seguinte mensagem 
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuário inexistente");
+					// limpar o campo ID
+					txtId.setText(null);
+					// gerenciar os botoes
+					btnAdicionar_1.setEnabled(true);
+					btnPesquisar_1.setEnabled(false);
+					btnEditar_1.setEnabled(false);
+					btnExcluir_1.setEnabled(false);
+					// desabilitar o txtId e posicionar o cursor no usuario
+					txtId.setEnabled(false);
+					txtUsuario.requestFocus();
+				}
+			} catch (Exception e) {
+				// caso ocorra algum problema, mostre na tela o erro que está relacionado na infraestrutura
+				System.out.println(e);
+			}
+		}
 	}
 
+	// adicionar usuario (CRUD Create) Criação de usuário pela janela interativa Java
+	private void adicionarUsuario() {
+		// validacao dos campos obrigatorios
+		if (txtUsuario.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Usuário");
+			txtUsuario.requestFocus();
+		} else if (txtLogin.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Login");
+			txtLogin.requestFocus();
+		} else {
+			// instrucao sql para inserir um usuario o mesmo comando que damos no sql para criar um usuário 
+		String create = "insert into usuarios(usuario,login,senha) values (?,?,md5(?))";
+		}
+		
 	}
-
-	}
-
-
+	
+	
+	// Editar usuario (CRUD Update) Criação de usuário pela janela interativa Java
+		private void editarUsuario() {
+			// validacao dos campos obrigatorios
+			if (txtUsuario.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Preencha o Usuário");
+				txtUsuario.requestFocus();
+			} else if (txtLogin.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Preencha o Login");
+				txtLogin.requestFocus();
+			} else {
+				// instrucao sql para Editar usuario o mesmo comando que damos no sql para Editar um usuário 
+			String update = "update usuarios set usuario=?,login=?,senha=md5(?) where id=?";
+			}
+			
+		}
+		// Exluir usuario (CRUD Delete) excluir um  usuário pela janela interativa Java
+				private void excluirUsuario() {
+					// validacao dos campos obrigatorios
+					if (txtUsuario.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Preencha o Usuário");
+						txtUsuario.requestFocus();
+					} else if (txtLogin.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Preencha o Login");
+						txtLogin.requestFocus();
+					} else {
+						// instrucao sql para deletar usuario o mesmo comando que damos no sql para Editar um usuário 
+					String delete = "delete from usuarios where id=?";
+					}
+					
+				}
+}

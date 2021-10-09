@@ -17,6 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
 public class Usuario extends JDialog {
@@ -100,9 +103,7 @@ public class Usuario extends JDialog {
 		JButton btnPesquisar = new JButton("");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Criando ação de pesquisar usuário
-				pesquisarUsuario();
-			}
+							}
 		});
 		btnPesquisar.setToolTipText("Pesquisar usu\u00E1rio");
 		btnPesquisar.setIcon(new ImageIcon(Usuario.class.getResource("/img/read.png")));
@@ -138,26 +139,51 @@ public class Usuario extends JDialog {
 		lblCamposObrigatrios.setBounds(206, 11, 164, 14);
 		getContentPane().add(lblCamposObrigatrios);
 	}
-	// fim do construtor  importe a classe DAO crtl + shift + o
-	 DAO dao = new DAO();
-	    // Pesquisar usuario
-	private void pesquisarUsuario(){
-
-	// validação da pesquisa
-	// dentro do if é o nome do botao do id de pesquisa txtid
-	// depois de fazer o preenchimento if vai no designer e crie uma ação para esse botão.
-	if (txtId.getText().isEmpty()){
-	JOptionPane.showMessageDialog(null, "Preencha o ID");
-	// adicionando uma ação em quando clicar em ok voltar a tela de usuário
-	txtId.requestFocus();
-	}else {
-	    // logica principal
-
-
+	// adicionar usuario (CRUD Create) Criação de usuário pela janela interativa Java
+		private void adicionarUsuario() {
+			// validacao dos campos obrigatorios
+			if (txtUsuario.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Preencha o Usuário");
+				txtUsuario.requestFocus();
+			} else if (txtLogin.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Preencha o Login");
+				txtLogin.requestFocus();
+			} else {
+				// instrucao sql para inserir um usuario o mesmo comando que damos no sql para criar um usuário 
+			String create = "insert into usuarios(usuario,login,senha) values (?,?,md5(?))";
+			}
+			
+		}
+		
+		
+		// Editar usuario (CRUD Update) Criação de usuário pela janela interativa Java
+			private void editarUsuario() {
+				// validacao dos campos obrigatorios
+				if (txtUsuario.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o Usuário");
+					txtUsuario.requestFocus();
+				} else if (txtLogin.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o Login");
+					txtLogin.requestFocus();
+				} else {
+					// instrucao sql para Editar usuario o mesmo comando que damos no sql para Editar um usuário 
+				String update = "update usuarios set usuario=?,login=?,senha=md5(?) where id=?";
+				}
+				
+			}
+			// Exluir usuario (CRUD Delete) excluir um  usuário pela janela interativa Java
+					private void excluirUsuario() {
+						// validacao dos campos obrigatorios
+						if (txtUsuario.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Preencha o Usuário");
+							txtUsuario.requestFocus();
+						} else if (txtLogin.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Preencha o Login");
+							txtLogin.requestFocus();
+						} else {
+							// instrucao sql para deletar usuario o mesmo comando que damos no sql para Editar um usuário 
+						String delete = "delete from usuarios where id=?";
+						}
+						
+					}
 	}
-
-	}
-
-	}
-
-
