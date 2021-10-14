@@ -1,0 +1,161 @@
+package view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Cliente extends JDialog {
+	private JTextField txtIdCli;
+	private JTextField txtCliente;
+	private JTextField txtFone;
+	private JTextField txtEndereco;
+	private JTextField txtEmail;
+	private JTextField textField;
+	private JTextField txtCpf;
+	private JTextField txtCidade;
+	private JTextField txtEstado;
+	private JTextField txtBairro;
+	private JTextField txtComplemento;
+	private JTextField txtnumero;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Cliente dialog = new Cliente();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Cliente() {
+		setTitle("MW.Mec\u00E2nica - Cliente");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Cliente.class.getResource("/img/carro1.png")));
+		setResizable(false);
+		setModal(true);
+		setBounds(100, 100, 618, 377);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("ID");
+		lblNewLabel.setBounds(30, 123, 46, 14);
+		getContentPane().add(lblNewLabel);
+		
+		txtIdCli = new JTextField();
+		txtIdCli.setBounds(60, 120, 46, 20);
+		getContentPane().add(txtIdCli);
+		txtIdCli.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nome");
+		lblNewLabel_1.setBounds(10, 165, 46, 14);
+		getContentPane().add(lblNewLabel_1);
+		
+		txtCliente = new JTextField();
+		txtCliente.setBounds(60, 162, 116, 20);
+		getContentPane().add(txtCliente);
+		txtCliente.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Telefone");
+		lblNewLabel_2.setBounds(8, 193, 62, 14);
+		getContentPane().add(lblNewLabel_2);
+		
+		txtFone = new JTextField();
+		txtFone.setBounds(60, 190, 86, 20);
+		getContentPane().add(txtFone);
+		txtFone.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Endere\u00E7o");
+		lblNewLabel_3.setBounds(315, 165, 62, 14);
+		getContentPane().add(lblNewLabel_3);
+		
+		txtEndereco = new JTextField();
+		txtEndereco.setBounds(401, 162, 191, 20);
+		getContentPane().add(txtEndereco);
+		txtEndereco.setColumns(10);
+		
+		JLabel lblNewLabel_4 = new JLabel("Email");
+		lblNewLabel_4.setBounds(10, 221, 62, 14);
+		getContentPane().add(lblNewLabel_4);
+		
+		txtEmail = new JTextField();
+		txtEmail.setBounds(60, 218, 86, 20);
+		getContentPane().add(txtEmail);
+		txtEmail.setColumns(10);
+		
+		JLabel lblNewLabel_5 = new JLabel("CEP");
+		lblNewLabel_5.setBounds(315, 126, 46, 14);
+		getContentPane().add(lblNewLabel_5);
+		
+		textField = new JTextField();
+		textField.setBounds(401, 120, 86, 20);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_6 = new JLabel("CPF");
+		lblNewLabel_6.setBounds(10, 249, 31, 14);
+		getContentPane().add(lblNewLabel_6);
+		
+		txtCpf = new JTextField();
+		txtCpf.setBounds(60, 246, 86, 20);
+		getContentPane().add(txtCpf);
+		txtCpf.setColumns(10);
+		
+		JLabel lblNewLabel_7 = new JLabel("Cidade");
+		lblNewLabel_7.setBounds(315, 252, 46, 14);
+		getContentPane().add(lblNewLabel_7);
+		
+		txtCidade = new JTextField();
+		txtCidade.setBounds(401, 249, 191, 20);
+		getContentPane().add(txtCidade);
+		txtCidade.setColumns(10);
+		
+		JLabel lblNewLabel_8 = new JLabel("Estado");
+		lblNewLabel_8.setBounds(315, 280, 46, 14);
+		getContentPane().add(lblNewLabel_8);
+		
+		txtEstado = new JTextField();
+		txtEstado.setBounds(401, 277, 86, 20);
+		getContentPane().add(txtEstado);
+		txtEstado.setColumns(10);
+		
+		JLabel lblNewLabel_9 = new JLabel("Bairro");
+		lblNewLabel_9.setBounds(315, 224, 46, 14);
+		getContentPane().add(lblNewLabel_9);
+		
+		txtBairro = new JTextField();
+		txtBairro.setBounds(401, 221, 191, 20);
+		getContentPane().add(txtBairro);
+		txtBairro.setColumns(10);
+		
+		JLabel lblNewLabel_10 = new JLabel("Complemento");
+		lblNewLabel_10.setBounds(315, 313, 97, 14);
+		getContentPane().add(lblNewLabel_10);
+		
+		txtComplemento = new JTextField();
+		txtComplemento.setBounds(401, 310, 191, 20);
+		getContentPane().add(txtComplemento);
+		txtComplemento.setColumns(10);
+		
+		JLabel lblNewLabel_11 = new JLabel("N\u00FAmero");
+		lblNewLabel_11.setBounds(315, 193, 46, 14);
+		getContentPane().add(lblNewLabel_11);
+		
+		txtnumero = new JTextField();
+		txtnumero.setBounds(401, 190, 86, 20);
+		getContentPane().add(txtnumero);
+		txtnumero.setColumns(10);
+
+	}
+}
