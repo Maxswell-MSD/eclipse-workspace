@@ -66,6 +66,15 @@ public class Principal extends JFrame {
 		contentPane.add(btnUsuarios);
 		
 		JButton btnClientes = new JButton("");
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//evento actionPerformed (pressionar o botao)
+				//exibir a tela de Clientes
+				Cliente cliente = new Cliente();
+				cliente.setVisible(true);
+				
+			}
+		});
 		btnClientes.setIcon(new ImageIcon(Principal.class.getResource("/img/clientes.png")));
 		btnClientes.setToolTipText("Clientes");
 		btnClientes.setBounds(164, 0, 128, 128);

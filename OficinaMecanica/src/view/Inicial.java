@@ -62,8 +62,16 @@ public class Inicial extends JFrame {
 		btnUsuarios.setIcon(new ImageIcon(Inicial.class.getResource("/img/users.png")));
 		btnUsuarios.setBounds(26, 11, 128, 128);
 		contentPane.add(btnUsuarios);
-		
 		JButton btnClientes = new JButton("");
+		
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//evento actionPerformed (pressionar o botao)
+				//exibir a tela de Clientes
+				Cliente cliente = new Cliente();
+				cliente.setVisible(true);
+			}
+		});
 		btnClientes.setIcon(new ImageIcon(Inicial.class.getResource("/img/clientes.png")));
 		btnClientes.setToolTipText("Clientes");
 		btnClientes.setBounds(181, 11, 128, 128);
