@@ -268,7 +268,16 @@ public class Usuario extends JDialog {
 				// criando acao limpar caixa de texto quando os dados forem cadastrado
 				limpar();
 				con.close();
-			} catch (Exception e) {
+				// a linha abaixo trata o problema do campo unique no login, devolvendo uma mensagem amigavel ao usuario se o login ja existir
+			} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+				JOptionPane.showMessageDialog(null, "Login já existente\nCadastre outro login");
+				txtLogin.setText(null);
+				txtLogin.requestFocus();
+				}
+				
+				
+			
+			catch (Exception e) {
 				System.out.println(e);
 			}
 		}

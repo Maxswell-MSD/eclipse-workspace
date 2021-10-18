@@ -2,30 +2,31 @@ package view;
 
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import model.DAO;
 import net.proteanit.sql.DbUtils;
 
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JDesktopPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 public class Cliente extends JDialog {
-	private JTextField textField;
+	private JTextField txtIdCli;
 	private JTextField txtCliente;
 	private JTextField txtFoneCli;
 
@@ -69,10 +70,11 @@ public class Cliente extends JDialog {
 		lblNewLabel_1_1.setBounds(62, 235, 46, 14);
 		getContentPane().add(lblNewLabel_1_1);
 		
-		textField = new JTextField();
-		textField.setBounds(118, 196, 86, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		txtIdCli = new JTextField();
+		txtIdCli.setEnabled(false);
+		txtIdCli.setBounds(118, 196, 86, 20);
+		getContentPane().add(txtIdCli);
+		txtIdCli.setColumns(10);
 		
 		txtCliente = new JTextField();
 		txtCliente.setColumns(10);
@@ -120,7 +122,33 @@ public class Cliente extends JDialog {
 		desktopPane.add(scrollPane);
 		
 		tableCliente = new JTable();
+		tableCliente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Gerando evento em cursor do mouser ser direcionado para lista de cadastrados e fara o preenchiemto dos campos
+				setarCampos();
+			}
+		});
 		scrollPane.setViewportView(tableCliente);
+		
+		JButton btnEditarCliente = new JButton("Editar");
+		btnEditarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Criando evento de editar cliente
+				editarCliente();
+			}
+		});
+		btnEditarCliente.setBounds(257, 285, 89, 23);
+		getContentPane().add(btnEditarCliente);
+		
+		JButton btnExcluirCliente = new JButton("Excluir");
+		btnExcluirCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// deletando cliente cadastrado
+				excluirCliente();			}
+		});
+		btnExcluirCliente.setBounds(385, 285, 89, 23);
+		getContentPane().add(btnExcluirCliente);
 
 	}
 	// fim do construtor importe a classe DAO crtl + shift + o
@@ -187,7 +215,97 @@ public class Cliente extends JDialog {
 		System.out.println(e);
 		}
 	}
-	
+	// setar os campos do formulario com o conteudo da tabela assim que colocar o cursor do mouse sobre o id ele vai preencher os campos
+	private void setarCampos() {
+	int setar = tableCliente.getSelectedRow();
+	//(setar, 0) 0 -> 1º campo da tabela | 1 -> 2º campo da tabela ...
+	txtIdCli.setText(tableCliente.getModel().getValueAt(setar, 0).toString());
+	txtCliente.setText(tableCliente.getModel().getValueAt(setar, 1).toString());
+	txtFoneCli.setText(tableCliente.getModel().getValueAt(setar, 2).toString());
+	}
+
+	// EDITAR CLIENTE (CRUD Update) EDITAR CLIENTE CADASTRADO
+		private void editarCliente() {
+			// validacao dos campos obrigatorios
+			if (txtCliente.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Preencha o nome do Cliente");
+				txtCliente.requestFocus();
+			} else if (txtFoneCli.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Preencha o Login");
+				txtFoneCli.requestFocus();
+			} else {
+				// instrucao sql para Editar usuario o mesmo comando que damos no sql para
+				// Editar um usuário
+				String update = "update clientes set nome=?,fone=? where idCli=?";
+				try {
+					// estabelecer uma conexao atraves da classe DAO que é responsável pela ligação
+					// do sql abrindo a conexão
+					Connection con = dao.conectar();
+					// preparar a instrução sql PreparedStatement vai substituir (?) pelo conteúdo
+					// cadastrado no sql cada
+					PreparedStatement pst = con.prepareStatement(update);
+					// substituir parametros setamos o 2 de acordo com a posição de cadastro de
+					// usuário no sql (?)
+					
+					pst.setString(1, txtCliente.getText());
+					pst.setString(2, txtFoneCli.getText());
+					pst.setString(3, txtIdCli.getText());
+					
+					// exibir uma caixa de mensagem mostrando que o usuário foi editado com sucesso.
+					int confirma = pst.executeUpdate();
+					if (confirma == 1) {
+						JOptionPane.showMessageDialog(null, "Dados de Cliente alterado com Sucesso");
+					}
+					// criando acao limpar caixa de texto quando os dados forem cadastrado
+					limpar();
+					con.close();
+					
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+			}
+
+		}
+
+					
+					
+					
+
+		// Exluir usuario (CRUD Delete) excluir um usuário pela janela interativa Java
+		private void excluirCliente() {
+			// validacao dos campos obrigatorios
+			//confirmar a exclusao do usuario
+			int confirma = JOptionPane.showConfirmDialog(null, "Deseja realmente Excluir o usuário?", "Atenção!", JOptionPane.YES_NO_OPTION);
+			if(confirma ==JOptionPane.YES_OPTION) {
+				// instrucao sql para deletar usuario o mesmo comando que damos no sql para
+				// Editar um usuário
+				String delete = "delete from clientes where idCli=?";
+				try {
+					// estabelecer uma conexao atraves da classe DAO que é responsável pela ligação
+					// do sql abrindo a conexão
+					Connection con = dao.conectar();
+					// preparar a instrução sql PreparedStatement vai substituir (?) pelo conteúdo
+					// cadastrado no sql cada
+					PreparedStatement pst = con.prepareStatement(delete);
+					// substituir parametros setamos o 2 de acordo com a posição de cadastro de
+					// usuário no sql (?)
+					pst.setString(1, txtIdCli.getText());
+					// exibir uma caixa de mensagem mostrando que o usuário foi excluido  com sucesso.
+					int verifica = pst.executeUpdate();
+					if (verifica == 1) {
+						JOptionPane.showMessageDialog(null, "Dados do Usuário Deletado com Sucesso");
+					}
+					// criando acao limpar caixa de texto quando os dados forem cadastrado
+					limpar();
+					con.close();
+					
+					
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+			}
+
+		}
 	
 	
 	

@@ -33,6 +33,8 @@ import org.dom4j.io.SAXReader;
 import Atxy2k.CustomTextField.RestrictedTextField;
 import model.DAO;
 import net.proteanit.sql.DbUtils;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Cliente extends JDialog {
 	private JTextField txtIdCli;
@@ -188,7 +190,7 @@ public class Cliente extends JDialog {
 				adicionarCliente();
 			}
 		});
-		btnAdicionarCliente.setBounds(253, 304, 89, 23);
+		btnAdicionarCliente.setBounds(87, 304, 89, 23);
 		getContentPane().add(btnAdicionarCliente);
 		
 		txtPesquisar = new JTextField();
@@ -218,6 +220,12 @@ public class Cliente extends JDialog {
 		desktopPane.add(scrollPane);
 		
 		tableCliente = new JTable();
+		tableCliente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Criando evento de preenchimento ao direcionar o cursor do mouse sobre um usuário listado
+				setarCampos();			}
+		});
 		scrollPane.setViewportView(tableCliente);
 		
 		cboUf = new JComboBox();
@@ -255,6 +263,25 @@ public class Cliente extends JDialog {
 		});
 		btnLimpar.setBounds(424, 154, 89, 23);
 		getContentPane().add(btnLimpar);
+		
+		JButton btnEditarUsuario = new JButton("Editar");
+		btnEditarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Cliando evento de editar clientes
+				editarCliente();			}
+		});
+		btnEditarUsuario.setBounds(271, 304, 89, 23);
+		getContentPane().add(btnEditarUsuario);
+		
+		JButton btnExcluirUsuario = new JButton("Excluir");
+		btnExcluirUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Criando evento de deletar cliente cadastrado
+				excluirCliente();
+			}
+		});
+		btnExcluirUsuario.setBounds(463, 304, 89, 23);
+		getContentPane().add(btnExcluirUsuario);
 		validar.setOnlyNums(true);
 		validar.setLimit(8); 
 
@@ -383,7 +410,7 @@ public class Cliente extends JDialog {
 				 else {
 						// logica principal
 						// String (query) SQL
-						String create = "insert into clientes (nome,cpf,email,telefone,cep,endereco,numero,cidade,bairro,complemento,estado) values(?,?,?,?,?,?,?,?,?,?,?)";
+						String create = "insert into clientes (nome,cpf,email,telefone,cep,endereco,numero,cidade,bairro,complemento) values(?,?,?,?,?,?,?,?,?,?)";
 						try {
 							//abrir a conexao com o banco
 							Connection con = dao.conectar();
@@ -443,8 +470,154 @@ public class Cliente extends JDialog {
 			
 		}
 		}
+		///////////////////////////////////// EDITAR CLIENTE //////////////////////////////////////////////
+		// EDITAR CLIENTE (CRUD Update) EDITAR CLIENTE CADASTRADO
+			private void editarCliente() {
+				// validacao dos campos obrigatorios
+				if (txtCliente.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o nome do Cliente");
+					txtCliente.requestFocus();
+				} else if (txtCpf.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o CPF");
+					txtCpf.requestFocus();
+				}else if (txtEmail.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Preencha o Email");
+						txtEmail.requestFocus();
+						
+				}else if (txtFone.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o Telefone");
+					txtFone.requestFocus();
+					
+				}else if (txtCep.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o CEP");
+					txtCep.requestFocus();
+				}else if (txtEndereco.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o Endereço");
+					txtEndereco.requestFocus();
+				}else if (txtNu.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o Número residencial");
+					txtNu.requestFocus();
+				}else if (txtCidade.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha a Cidade");
+					txtCidade.requestFocus();
+				}else if (txtBairro.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o Bairro");
+					txtBairro.requestFocus();
+				}else if (txtComplemento.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha o Complemento");
+					txtComplemento.requestFocus();
+						
+						
+					
+				
+						
+					} else {
+					// instrucao sql para Editar usuario o mesmo comando que damos no sql para
+					// Editar um usuário
+					String update = "update clientes set nome=?,cpf=?,email=?,telefone=?,cep=?,endereco=?,numero=?,cidade=?,bairro=?,complemento=? where idCli=?";
+					try {
+						// estabelecer uma conexao atraves da classe DAO que é responsável pela ligação
+						// do sql abrindo a conexão
+						Connection con = dao.conectar();
+						// preparar a instrução sql PreparedStatement vai substituir (?) pelo conteúdo
+						// cadastrado no sql cada
+						PreparedStatement pst = con.prepareStatement(update);
+						// substituir parametros setamos o 2 de acordo com a posição de cadastro de
+						// usuário no sql (?)
+						
+						pst.setString(1, txtCliente.getText());
+						pst.setString(2, txtCpf.getText());
+						pst.setString(3, txtEmail.getText());
+						pst.setString(4, txtFone.getText());
+						pst.setString(5, txtCep.getText());
+						pst.setString(6, txtEndereco.getText());
+						pst.setString(7, txtNu.getText());
+						pst.setString(8, txtCidade.getText());
+						pst.setString(9, txtBairro.getText());
+						pst.setString(10, txtComplemento.getText());
+						pst.setString(11, txtIdCli.getText());
+						
+						// exibir uma caixa de mensagem mostrando que o usuário foi editado com sucesso.
+						int confirma = pst.executeUpdate();
+						if (confirma == 1) {
+							JOptionPane.showMessageDialog(null, "Dados de Cliente alterado com Sucesso");
+						}
+						// criando acao limpar caixa de texto quando os dados forem cadastrado
+						limpar();
+						con.close();
+						
+					} catch (Exception e) {
+						System.out.println(e);
+					}
+				}
+
+			}
+			
+			
+			/////////////////////// DELETE (CRUD) ///////////////////////////////////////////////
+			// Exluir usuario (CRUD Delete) excluir um usuário pela janela interativa Java
+			private void excluirCliente() {
+				// validacao dos campos obrigatorios
+				//confirmar a exclusao do usuario
+				int confirma = JOptionPane.showConfirmDialog(null, "Deseja realmente Excluir o usuário?", "Atenção!", JOptionPane.YES_NO_OPTION);
+				if(confirma ==JOptionPane.YES_OPTION) {
+					// instrucao sql para deletar usuario o mesmo comando que damos no sql para
+					// Editar um usuário
+					String delete = "delete from clientes where idCli=?";
+					try {
+						// estabelecer uma conexao atraves da classe DAO que é responsável pela ligação
+						// do sql abrindo a conexão
+						Connection con = dao.conectar();
+						// preparar a instrução sql PreparedStatement vai substituir (?) pelo conteúdo
+						// cadastrado no sql cada
+						PreparedStatement pst = con.prepareStatement(delete);
+						// substituir parametros setamos o 2 de acordo com a posição de cadastro de
+						// usuário no sql (?)
+						pst.setString(1, txtIdCli.getText());
+						// exibir uma caixa de mensagem mostrando que o usuário foi excluido  com sucesso.
+						int verifica = pst.executeUpdate();
+						if (verifica == 1) {
+							JOptionPane.showMessageDialog(null, "Dados do Usuário Deletado com Sucesso");
+						}
+						// criando acao limpar caixa de texto quando os dados forem cadastrado
+						limpar();
+						con.close();
+						
+						
+					} catch (Exception e) {
+						System.out.println(e);
+					}
+				}
+
+			}
+		
+			
+			
 		
 		
+		
+		
+		
+		
+		// setar os campos do formulario com o conteudo da tabela assim que colocar o cursor do mouse sobre o id ele vai preencher os campos
+		private void setarCampos() {
+		int setar = tableCliente.getSelectedRow();
+		//(setar, 0) 0 -> 1º campo da tabela | 1 -> 2º campo da tabela ...
+		txtIdCli.setText(tableCliente.getModel().getValueAt(setar, 0).toString());
+		txtCliente.setText(tableCliente.getModel().getValueAt(setar, 1).toString());
+		txtCpf.setText(tableCliente.getModel().getValueAt(setar, 2).toString());
+		txtEmail.setText(tableCliente.getModel().getValueAt(setar, 3).toString());
+		txtFone.setText(tableCliente.getModel().getValueAt(setar, 4).toString());
+		txtCep.setText(tableCliente.getModel().getValueAt(setar, 5).toString());
+		txtEndereco.setText(tableCliente.getModel().getValueAt(setar, 6).toString());
+		txtNu.setText(tableCliente.getModel().getValueAt(setar, 7).toString());
+		txtCidade.setText(tableCliente.getModel().getValueAt(setar, 8).toString());
+		txtBairro.setText(tableCliente.getModel().getValueAt(setar, 9).toString());
+		txtComplemento.setText(tableCliente.getModel().getValueAt(setar, 10).toString());
+		
+	
+		
+		}
 		
 		
 		
