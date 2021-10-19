@@ -13,6 +13,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
+import java.awt.SystemColor;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
+import java.awt.Font;
 
 public class Inicial extends JFrame {
 
@@ -44,12 +48,16 @@ public class Inicial extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 538, 346);
 		contentPane = new JPanel();
-		contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(SystemColor.window);
+		contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnUsuarios = new JButton("");
+		btnUsuarios.setContentAreaFilled(false);
+		btnUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnUsuarios.setBorder(null);
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//evento actionPerformed (pressionar o botao)
@@ -59,10 +67,14 @@ public class Inicial extends JFrame {
 			}
 		});
 		btnUsuarios.setToolTipText("Usu\u00E1rios");
-		btnUsuarios.setIcon(new ImageIcon(Inicial.class.getResource("/img/users.png")));
-		btnUsuarios.setBounds(26, 11, 128, 128);
+		btnUsuarios.setIcon(new ImageIcon(Inicial.class.getResource("/img/Usuario.png")));
+		btnUsuarios.setBounds(10, 0, 128, 128);
 		contentPane.add(btnUsuarios);
 		JButton btnClientes = new JButton("");
+		btnClientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnClientes.setContentAreaFilled(false);
+		btnClientes.setBorder(null);
+		btnClientes.setBackground(Color.LIGHT_GRAY);
 		
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -74,19 +86,19 @@ public class Inicial extends JFrame {
 		});
 		btnClientes.setIcon(new ImageIcon(Inicial.class.getResource("/img/clientes.png")));
 		btnClientes.setToolTipText("Clientes");
-		btnClientes.setBounds(181, 11, 128, 128);
+		btnClientes.setBounds(10, 160, 113, 118);
 		contentPane.add(btnClientes);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Inicial.class.getResource("/img/llmw.png")));
-		lblNewLabel.setBounds(277, 0, 255, 212);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		lblNewLabel.setIcon(new ImageIcon(Inicial.class.getResource("/img/Cab.png")));
+		lblNewLabel.setBounds(133, 85, 243, 118);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(302, 29, 153, 157);
-		contentPane.add(lblNewLabel_2);
-		
 		JButton btnSobre = new JButton("");
+		btnSobre.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnSobre.setContentAreaFilled(false);
 		btnSobre.setBorder(null);
 		btnSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,17 +109,28 @@ public class Inicial extends JFrame {
 		});
 		btnSobre.setToolTipText("Sobre");
 		btnSobre.setIcon(new ImageIcon(Inicial.class.getResource("/img/interrogation.png")));
-		btnSobre.setBounds(216, 203, 64, 64);
+		btnSobre.setBounds(432, 204, 64, 64);
 		contentPane.add(btnSobre);
 		
 		JButton btnUsuarios_1 = new JButton("");
-		btnUsuarios_1.setIcon(new ImageIcon(Inicial.class.getResource("/img/oss.png")));
+		btnUsuarios_1.setContentAreaFilled(false);
+		btnUsuarios_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnUsuarios_1.setBorder(null);
+		btnUsuarios_1.setIcon(new ImageIcon(Inicial.class.getResource("/img/oficina.png")));
 		btnUsuarios_1.setToolTipText("Os");
-		btnUsuarios_1.setBounds(24, 168, 128, 128);
+		btnUsuarios_1.setBounds(386, 0, 128, 128);
 		contentPane.add(btnUsuarios_1);
 		
-		JLabel lblNewLabel_3 = new JLabel("Oficina Mec\u00E2nica");
-		lblNewLabel_3.setBounds(359, 185, 153, 14);
+		JLabel lblNewLabel_2 = new JLabel("Bem-Vindo(a)");
+		lblNewLabel_2.setForeground(new Color(128, 128, 128));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_2.setBounds(196, 11, 149, 18);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Sistema inicial de Cadastro de Usu\u00E1rio , Clientes e Ordem de Servi\u00E7o");
+		lblNewLabel_3.setForeground(new Color(128, 128, 128));
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_3.setBounds(52, 280, 426, 27);
 		contentPane.add(lblNewLabel_3);
 	}
 }

@@ -7,14 +7,14 @@
 		<item key="height" value="559"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.icon.IconPropertyEditor$ImageDialog">
-		<item key="x" value="247"/>
+		<item key="x" value="434"/>
 		<item key="y" value="49"/>
 		<item key="width" value="881"/>
 		<item key="height" value="580"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.border.BorderDialog">
-		<item key="x" value="442"/>
-		<item key="y" value="123"/>
+		<item key="x" value="89"/>
+		<item key="y" value="134"/>
 		<item key="width" value="482"/>
 		<item key="height" value="481"/>
 	</section>

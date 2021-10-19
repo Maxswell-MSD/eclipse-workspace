@@ -25,6 +25,8 @@ import java.awt.event.WindowEvent;
 import java.security.Principal;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import java.awt.Font;
 
 public class Login extends JFrame {
 
@@ -52,6 +54,9 @@ public class Login extends JFrame {
 	 * Create the frame. Construtor
 	 */
 	public Login() {
+		setBackground(SystemColor.textHighlight);
+		setForeground(SystemColor.activeCaption);
+		setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -65,6 +70,7 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.window);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -96,14 +102,20 @@ public class Login extends JFrame {
 		contentPane.add(btnEntrar);
 
 		lblStatus = new JLabel("");
-		lblStatus.setIcon(new ImageIcon(Login.class.getResource("/img/serveroff.png")));
-		lblStatus.setBounds(314, 154, 48, 48);
+		lblStatus.setIcon(new ImageIcon(Login.class.getResource("/img/vermelho.png")));
+		lblStatus.setBounds(290, 106, 48, 48);
 		contentPane.add(lblStatus);
+		
+		lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/img/Cab.png")));
+		lblNewLabel_2.setBounds(193, 122, 231, 128);
+		contentPane.add(lblNewLabel_2);
 	}// fim do construtor
 		// Criar um objeto para conectar com o banco de dados
 
 	DAO dao = new DAO();
 	private JLabel lblStatus;
+	private JLabel lblNewLabel_2;
 	// Status da conexao
 	private void status() {
 	try {
@@ -114,12 +126,12 @@ public class Login extends JFrame {
 	// imprimir a mensagem no console
 	System.out.println("Erro de conexão");
 	// trocar o icone
-	lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/serveroff.png")));
+	lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vermelho.png")));
 	} else {
 	// imprimir a mensagem no console
 	System.out.println("Conexão estabelecida com sucesso");
 	// exibir o icone
-	lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/serveron.png")));
+	lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/verde.png")));
 	}
 	//encerrar a conexao
 		con.close();
@@ -139,7 +151,7 @@ public class Login extends JFrame {
 		// logica principal do login
 		try {
 		// query (comando sql)
-		String read = "select * from usuarios where usuario=? and senha=md5(?)";
+		String read = "select * from usuarios where login=? and senha=md5(?)";
 		// abrir a conexao
 		Connection con = dao.conectar();
 		// Uso do PrepareStatement(JDBC) para substituir as ? pelo conteudo das caixas

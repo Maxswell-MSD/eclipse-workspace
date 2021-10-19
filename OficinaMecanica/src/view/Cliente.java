@@ -206,7 +206,7 @@ public class Cliente extends JDialog {
 		txtPesquisar.setColumns(10);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Cliente.class.getResource("/img/pesquisar.png")));
+		btnNewButton.setIcon(new ImageIcon(Cliente.class.getResource("/img/lupa.png")));
 		btnNewButton.setBounds(125, 11, 32, 32);
 		getContentPane().add(btnNewButton);
 		

@@ -45,6 +45,9 @@ public class Sobre extends JDialog {
 		getContentPane().add(lblAutoresMaxswell);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setFocusTraversalPolicyProvider(true);
+		lblNewLabel_1.setFocusCycleRoot(true);
+		lblNewLabel_1.setBorder(null);
 		lblNewLabel_1.setIcon(new ImageIcon(Sobre.class.getResource("/img/GPL .png")));
 		lblNewLabel_1.setBounds(360, 104, 64, 64);
 		getContentPane().add(lblNewLabel_1);
