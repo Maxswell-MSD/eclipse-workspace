@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,8 +35,6 @@ import org.dom4j.io.SAXReader;
 import Atxy2k.CustomTextField.RestrictedTextField;
 import model.DAO;
 import net.proteanit.sql.DbUtils;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Cliente extends JDialog {
 	private JTextField txtIdCli;
@@ -183,7 +183,7 @@ public class Cliente extends JDialog {
 		getContentPane().add(txtNu);
 		txtNu.setColumns(10);
 		
-		JButton btnAdicionarCliente = new JButton("Adicionar");
+		btnAdicionarCliente = new JButton("Adicionar");
 		btnAdicionarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Chamando o metodo de validação de cliente botao
@@ -264,7 +264,8 @@ public class Cliente extends JDialog {
 		btnLimpar.setBounds(424, 154, 89, 23);
 		getContentPane().add(btnLimpar);
 		
-		JButton btnEditarUsuario = new JButton("Editar");
+		btnEditarUsuario = new JButton("Editar");
+		btnEditarUsuario.setEnabled(false);
 		btnEditarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Cliando evento de editar clientes
@@ -273,7 +274,8 @@ public class Cliente extends JDialog {
 		btnEditarUsuario.setBounds(271, 304, 89, 23);
 		getContentPane().add(btnEditarUsuario);
 		
-		JButton btnExcluirUsuario = new JButton("Excluir");
+		btnExcluirUsuario = new JButton("Excluir");
+		btnExcluirUsuario.setEnabled(false);
 		btnExcluirUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Criando evento de deletar cliente cadastrado
@@ -364,6 +366,9 @@ public class Cliente extends JDialog {
 		private JTextField txtPesquisar;
 		private JTable tableCliente;
 		private JComboBox cboUf;
+		private JButton btnExcluirUsuario;
+		private JButton btnEditarUsuario;
+		private JButton btnAdicionarCliente;
 		//metodo para inserir um novo cliente
 		private void adicionarCliente() {
 			//validacao dos campos obrigatorios
@@ -440,10 +445,21 @@ public class Cliente extends JDialog {
 							
 							//limpar os campos
 							limpar();
+							// a linha abaixo trata o problema do campo unique no login, devolvendo uma mensagem amigavel ao usuario se o login ja existir
+						} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+							JOptionPane.showMessageDialog(null, "CPF ou Email Já Registrado\nCadastre novamente ");
+							txtCpf.setText(null);
+							txtCpf.requestFocus();
+							txtEmail.setText(null);
+							txtEmail.requestFocus();
+							}
+							
+							
+					
 							
 							
 							
-							} catch (Exception e) {
+							 catch (Exception e) {
 							System.out.println(e);
 							}
 							}
@@ -473,6 +489,9 @@ public class Cliente extends JDialog {
 		///////////////////////////////////// EDITAR CLIENTE //////////////////////////////////////////////
 		// EDITAR CLIENTE (CRUD Update) EDITAR CLIENTE CADASTRADO
 			private void editarCliente() {
+				//confirmar a exclusao do usuario
+				int editar = JOptionPane.showConfirmDialog(null, "Deseja realmente Editar o usuário?", "Atenção!", JOptionPane.YES_NO_OPTION);
+				if(editar ==JOptionPane.YES_OPTION)
 				// validacao dos campos obrigatorios
 				if (txtCliente.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Preencha o nome do Cliente");
@@ -503,9 +522,7 @@ public class Cliente extends JDialog {
 				}else if (txtBairro.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Preencha o Bairro");
 					txtBairro.requestFocus();
-				}else if (txtComplemento.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Preencha o Complemento");
-					txtComplemento.requestFocus();
+				
 						
 						
 					
@@ -544,9 +561,20 @@ public class Cliente extends JDialog {
 						}
 						// criando acao limpar caixa de texto quando os dados forem cadastrado
 						limpar();
-						con.close();
 						
-					} catch (Exception e) {
+						con.close();
+						// a linha abaixo trata o problema do campo unique no cadastro de cliente , devolvendo uma mensagem amigavel ao usuario se o Cliente ja existir
+					} catch (java.sql.SQLIntegrityConstraintViolationException ex) {
+						JOptionPane.showMessageDialog(null, "CPF ou Email Já Registrado\nCadastre novamente ");
+						txtCpf.setText(null);
+						txtCpf.requestFocus();
+						txtEmail.setText(null);
+						txtEmail.requestFocus();
+						}
+					
+						
+						
+					 catch (Exception e) {
 						System.out.println(e);
 					}
 				}
@@ -613,7 +641,11 @@ public class Cliente extends JDialog {
 		txtNu.setText(tableCliente.getModel().getValueAt(setar, 7).toString());
 		txtCidade.setText(tableCliente.getModel().getValueAt(setar, 8).toString());
 		txtBairro.setText(tableCliente.getModel().getValueAt(setar, 9).toString());
-		txtComplemento.setText(tableCliente.getModel().getValueAt(setar, 10).toString());
+		txtComplemento.setText(tableCliente.getModel().getValueAt(setar, 10).toString());		
+		btnEditarUsuario.setEnabled(true);
+		btnExcluirUsuario.setEnabled(true);
+		btnAdicionarCliente.setEnabled(false);
+		
 		
 	
 		
@@ -636,6 +668,11 @@ public class Cliente extends JDialog {
 		txtBairro.setText(null);
 		txtComplemento.setText(null);
 		cboUf.setSelectedItem(null);
+		btnEditarUsuario.setEnabled(false);
+		btnExcluirUsuario.setEnabled(false);
+		btnAdicionarCliente.setEnabled(true);
+		
+		
 	
 }
 }

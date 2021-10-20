@@ -33,15 +33,15 @@ public class Sobre extends JDialog {
 		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/img/carro1.png")));
 		setTitle("MW.Mec\u00E2nica - Sobre");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 570, 344);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("MW.Mec\u00E2nica - Sistema de Gest\u00E3o de Servi\u00E7os da Oficina Mec\u00E2nica ");
-		lblNewLabel.setBounds(29, 44, 395, 14);
+		lblNewLabel.setBounds(30, 64, 395, 14);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblAutoresMaxswell = new JLabel("Autores : Maxswell e Wesley");
-		lblAutoresMaxswell.setBounds(29, 69, 395, 14);
+		lblAutoresMaxswell.setBounds(30, 89, 395, 14);
 		getContentPane().add(lblAutoresMaxswell);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
@@ -49,25 +49,32 @@ public class Sobre extends JDialog {
 		lblNewLabel_1.setFocusCycleRoot(true);
 		lblNewLabel_1.setBorder(null);
 		lblNewLabel_1.setIcon(new ImageIcon(Sobre.class.getResource("/img/GPL .png")));
-		lblNewLabel_1.setBounds(360, 104, 64, 64);
+		lblNewLabel_1.setBounds(439, 134, 64, 64);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Sob Licen\u00E7a GPL -  General Public License.");
-		lblNewLabel_2.setBounds(10, 174, 450, 14);
+		lblNewLabel_2.setBounds(26, 192, 450, 14);
 		getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("\u00C9 a designa\u00E7\u00E3o da licen\u00E7a de software. ");
-		lblNewLabel_3.setBounds(10, 197, 291, 14);
+		lblNewLabel_3.setBounds(26, 215, 291, 14);
 		getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Vers\u00E3o 1.0");
-		lblNewLabel_4.setBounds(75, 223, 83, 14);
+		lblNewLabel_4.setBounds(90, 258, 83, 14);
 		getContentPane().add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("www.mwmecanica.com");
-		lblNewLabel_5.setBounds(288, 236, 242, 14);
+		lblNewLabel_5.setBounds(361, 266, 242, 14);
 		getContentPane().add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Reposit\u00F3rio : https://github.com/Maxswell-MSD/eclipse-workspace");
+		lblNewLabel_6.setBounds(30, 109, 560, 14);
+		getContentPane().add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_4_1 = new JLabel("20/10/2021");
+		lblNewLabel_4_1.setBounds(439, 209, 83, 14);
+		getContentPane().add(lblNewLabel_4_1);
 
 	}
-
 }

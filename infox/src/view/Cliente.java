@@ -86,7 +86,7 @@ public class Cliente extends JDialog {
 		txtFoneCli.setBounds(428, 232, 109, 20);
 		getContentPane().add(txtFoneCli);
 		
-		JButton btnAdicionarCliente = new JButton("Adicionar");
+		btnAdicionarCliente = new JButton("Adicionar");
 		btnAdicionarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			 adicionarCliente();
@@ -131,7 +131,8 @@ public class Cliente extends JDialog {
 		});
 		scrollPane.setViewportView(tableCliente);
 		
-		JButton btnEditarCliente = new JButton("Editar");
+		btnEditarCliente = new JButton("Editar");
+		btnEditarCliente.setEnabled(false);
 		btnEditarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Criando evento de editar cliente
@@ -141,7 +142,8 @@ public class Cliente extends JDialog {
 		btnEditarCliente.setBounds(257, 285, 89, 23);
 		getContentPane().add(btnEditarCliente);
 		
-		JButton btnExcluirCliente = new JButton("Excluir");
+		btnExcluirCliente = new JButton("Excluir");
+		btnExcluirCliente.setEnabled(false);
 		btnExcluirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// deletando cliente cadastrado
@@ -158,6 +160,9 @@ public class Cliente extends JDialog {
 	DAO dao = new DAO();
 	private JTextField txtPesquisar;
 	private JTable tableCliente;
+	private JButton btnEditarCliente;
+	private JButton btnExcluirCliente;
+	private JButton btnAdicionarCliente;
 	//metodo para inserir um novo cliente
 	private void adicionarCliente() {
 	//validacao dos campos obrigatorios
@@ -188,6 +193,9 @@ public class Cliente extends JDialog {
 	con.close();
 	//limpar os campos
 	limpar();
+	
+	
+	
 	} catch (Exception e) {
 	System.out.println(e);
 	}
@@ -222,10 +230,17 @@ public class Cliente extends JDialog {
 	txtIdCli.setText(tableCliente.getModel().getValueAt(setar, 0).toString());
 	txtCliente.setText(tableCliente.getModel().getValueAt(setar, 1).toString());
 	txtFoneCli.setText(tableCliente.getModel().getValueAt(setar, 2).toString());
+	btnEditarCliente.setEnabled(true);
+	btnExcluirCliente.setEnabled(true);
+	btnAdicionarCliente.setEnabled(false);
 	}
 
 	// EDITAR CLIENTE (CRUD Update) EDITAR CLIENTE CADASTRADO
 		private void editarCliente() {
+			
+			//confirmar a exclusao do usuario
+			int editar = JOptionPane.showConfirmDialog(null, "Deseja realmente Editar o usuário?", "Atenção!", JOptionPane.YES_NO_OPTION);
+			if(editar ==JOptionPane.YES_OPTION)
 			// validacao dos campos obrigatorios
 			if (txtCliente.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Preencha o nome do Cliente");
