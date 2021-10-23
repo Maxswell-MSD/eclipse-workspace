@@ -81,6 +81,10 @@ public class Principal extends JFrame {
 		contentPane.add(btnClientes);
 		
 		JButton btnClientes_1 = new JButton("");
+		btnClientes_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnClientes_1.setIcon(new ImageIcon(Principal.class.getResource("/img/os.png")));
 		btnClientes_1.setToolTipText("OS");
 		btnClientes_1.setBounds(26, 168, 128, 128);

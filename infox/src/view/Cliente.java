@@ -59,41 +59,42 @@ public class Cliente extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Telefone");
-		lblNewLabel.setBounds(351, 235, 67, 14);
+		lblNewLabel.setBounds(350, 220, 67, 14);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblId = new JLabel("ID");
-		lblId.setBounds(62, 199, 46, 14);
+		lblId.setBounds(62, 183, 46, 14);
 		getContentPane().add(lblId);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Nome");
-		lblNewLabel_1_1.setBounds(62, 235, 46, 14);
+		lblNewLabel_1_1.setBounds(62, 220, 46, 14);
 		getContentPane().add(lblNewLabel_1_1);
 		
 		txtIdCli = new JTextField();
 		txtIdCli.setEnabled(false);
-		txtIdCli.setBounds(118, 196, 86, 20);
+		txtIdCli.setBounds(118, 180, 86, 20);
 		getContentPane().add(txtIdCli);
 		txtIdCli.setColumns(10);
 		
 		txtCliente = new JTextField();
 		txtCliente.setColumns(10);
-		txtCliente.setBounds(121, 232, 188, 20);
+		txtCliente.setBounds(118, 217, 188, 20);
 		getContentPane().add(txtCliente);
 		
 		txtFoneCli = new JTextField();
 		txtFoneCli.setColumns(10);
-		txtFoneCli.setBounds(428, 232, 109, 20);
+		txtFoneCli.setBounds(427, 217, 109, 20);
 		getContentPane().add(txtFoneCli);
 		
 		btnAdicionarCliente = new JButton("Adicionar");
+		btnAdicionarCliente.setIcon(new ImageIcon(Cliente.class.getResource("/img/create.png")));
 		btnAdicionarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			 adicionarCliente();
 				
 			}
 		});
-		btnAdicionarCliente.setBounds(118, 285, 89, 23);
+		btnAdicionarCliente.setBounds(128, 248, 64, 72);
 		getContentPane().add(btnAdicionarCliente);
 		
 		txtPesquisar = new JTextField();
@@ -132,6 +133,7 @@ public class Cliente extends JDialog {
 		scrollPane.setViewportView(tableCliente);
 		
 		btnEditarCliente = new JButton("Editar");
+		btnEditarCliente.setIcon(new ImageIcon(Cliente.class.getResource("/img/update.png")));
 		btnEditarCliente.setEnabled(false);
 		btnEditarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,17 +141,18 @@ public class Cliente extends JDialog {
 				editarCliente();
 			}
 		});
-		btnEditarCliente.setBounds(257, 285, 89, 23);
+		btnEditarCliente.setBounds(251, 252, 64, 64);
 		getContentPane().add(btnEditarCliente);
 		
 		btnExcluirCliente = new JButton("Excluir");
+		btnExcluirCliente.setIcon(new ImageIcon(Cliente.class.getResource("/img/delete.png")));
 		btnExcluirCliente.setEnabled(false);
 		btnExcluirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// deletando cliente cadastrado
 				excluirCliente();			}
 		});
-		btnExcluirCliente.setBounds(385, 285, 89, 23);
+		btnExcluirCliente.setBounds(380, 252, 64, 64);
 		getContentPane().add(btnExcluirCliente);
 
 	}
@@ -328,6 +331,9 @@ public class Cliente extends JDialog {
 	private void limpar() {
 	txtCliente.setText(null);
 	txtFoneCli.setText(null);
+	btnEditarCliente.setEnabled(false);
+	btnExcluirCliente.setEnabled(false);
+	btnAdicionarCliente.setEnabled(true);
 	}
 }
 
