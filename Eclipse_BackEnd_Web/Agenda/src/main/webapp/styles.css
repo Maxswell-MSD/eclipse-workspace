@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+body{
+	font-family: sans-serif;
+	font-size:20pt;
+	color:Red;
+	
+	
+
+}
+h1{
+	color:red;
+	
+}
+.Botao{
+	text-decoration:none;
+	background-color: red;
+	color: #fff;
+	padding: 5px 10px 5px 10px;
+}
