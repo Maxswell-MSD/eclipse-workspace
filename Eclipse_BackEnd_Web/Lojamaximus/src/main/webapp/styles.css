@@ -18,3 +18,35 @@ h1{
 	color: #fff;
 	padding: 5px 10px 5px 10px;
 }
+
+#tabela {
+margin-top: 30px;
+}
+
+
+
+#tabela th {
+border: 1px solid #dddddd;
+padding: 10px;
+text-align: left;
+background-color: #058ab3;
+color: #ffffff;
+font-Size:15px;
+}
+.Caixa1 {
+width: 320px;
+padding: 5px;
+margin-bottom: 10px;
+border: 1px solid #058ab3;
+border-radius: 5px;
+}
+
+
+
+.Caixa2 {
+width: 100px;
+padding: 5px;
+margin-bottom: 10px;
+border: 1px solid #058ab3;
+border-radius: 5px;
+}

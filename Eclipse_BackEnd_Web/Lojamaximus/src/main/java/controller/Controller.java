@@ -34,10 +34,10 @@ public class Controller extends HttpServlet {
 	 * Método principal do controller
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		//teste de conexão
+						//teste de conexão
 		dao.testeConexao();
+		//redirecionar para a tela do carrinho
+		response.sendRedirect("carrinho.jsp");
 	}
 
 }

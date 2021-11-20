@@ -9,12 +9,27 @@ body{
 
 }
 h1{
-	color:red;
+	color:black;
 	
 }
 .Botao{
 	text-decoration:none;
-	background-color: red;
+	background-color: black;
 	color: #fff;
 	padding: 5px 10px 5px 10px;
+}
+#tabela {
+margin-top: 30px;
+}
+
+
+
+#tabela th {
+border: 1px solid #dddddd;
+padding: 10px;
+text-align: left;
+background-color: gold;
+color: black;
+font-Size:20px;
+
 }
